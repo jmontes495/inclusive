@@ -16,22 +16,21 @@ public class DuelConf : MonoBehaviour {
 
 	private UIManager interfaz;
 
+	private EffectsManager eManager;
+
 	private bool enEspera = false;
 	// Use this for initialization
 	void Start () {
 		personajes = GetComponents<POPersonaje>();
 		enemigoActual = GetComponent<POEnemigo>();
 		interfaz = FindObjectOfType<UIManager>();
+		eManager = FindObjectOfType<EffectsManager>();
 		configure();
-		enEspera = false;
-		interfaz.configurarNombres(personajes[0].darNombre(), personajes[1].darNombre(), personajes[2].darNombre(), personajes[3].darNombre());
-		interfaz.actualizarAutoestimas(personajes[0].darAutoestima() + "", personajes[1].darAutoestima() + "", 
-									personajes[2].darAutoestima() + "", personajes[3].darAutoestima() + "");
-			}
+		}
 	
 	// Update is called once per frame
 	void Update () {
-		if(enEspera && Input.GetKeyDown(KeyCode.Space))
+		if(enEspera && enDuelo && Input.GetKeyDown(KeyCode.Space))
 		{
 			enEspera = false;
 			interfaz.habilitarBotones();
@@ -39,6 +38,12 @@ public class DuelConf : MonoBehaviour {
 			interfaz.setTexto("¿Qué hará " + personajes[personajeActual].darNombre() + "?");
 			interfaz.refrescarStats(personajes[personajeActual].darAutoestima(), personajes[personajeActual].darMultiplicador(), personajes[personajeActual].darDefensa());
 		}
+		if(!enDuelo && enEspera && Input.GetKeyDown(KeyCode.Space))
+		{
+			eManager.fadeOut();
+			configure();
+		}
+				
 	}
 
 	public void nextDuel()
@@ -49,19 +54,31 @@ public class DuelConf : MonoBehaviour {
 
 	public void configure()
 	{
+		string victima = "";
 		if(numeroDuelo == 1)
 		{
 			// Vulnerable, multiplicador, defensa
 			personajes[0].configurar(true, 0.2f, 2.0f);
+			victima = personajes[0].darNombre();
 			personajes[1].configurar(false, 1.5f, 0.15f);
 			personajes[2].configurar(false, 1.0f, 0.5f);
 			personajes[3].configurar(false, 1.0f, 0.5f);
-			enemigoActual.configurar("Tía Homofóbica", 105.5f, 10f);
-			interfaz.configurarEnemigo(enemigoActual.darNombre());
-			interfaz.actualizarPrejuicio(enemigoActual.darPrejuicio() + "");
-			interfaz.setTexto("¿Qué hará " + personajes[personajeActual].darNombre() + "?");
-			interfaz.refrescarStats(personajes[personajeActual].darAutoestima(), personajes[personajeActual].darMultiplicador(), personajes[personajeActual].darDefensa());
+			enemigoActual.configurar("Tía Homofóbica", 105.5f, 30f);
 		}
+		interfaz.configurarNombres(personajes[0].darNombre(), personajes[1].darNombre(), personajes[2].darNombre(), personajes[3].darNombre());
+		interfaz.actualizarAutoestimas(personajes[0].darAutoestima() + "", personajes[1].darAutoestima() + "", 
+									personajes[2].darAutoestima() + "", personajes[3].darAutoestima() + "");
+		
+
+		interfaz.configurarEnemigo(enemigoActual.darNombre(), enemigoActual.darAtaque() + "", victima);
+		interfaz.actualizarPrejuicio(enemigoActual.darPrejuicio() + "");
+		interfaz.setTexto("¿Qué hará " + personajes[personajeActual].darNombre() + "?");
+		interfaz.habilitarBotones();
+		interfaz.refrescarStats(personajes[personajeActual].darAutoestima(), personajes[personajeActual].darMultiplicador(), personajes[personajeActual].darDefensa());
+			
+		enEspera = false;
+		enDuelo = true;
+
 	}
 
 	public void avanzarPersonaje()
@@ -107,7 +124,7 @@ public class DuelConf : MonoBehaviour {
        			if(p0.darAutoestima() == 0)
        			{
        				enDuelo = false;
-       				texto += "se quedó sin autoestima FIN DEL JUEGO";
+       				texto += p0.darNombre() + " se quedó sin autoestima... \nFIN DEL JUEGO";
        				break;
        			}
     		}
@@ -122,7 +139,7 @@ public class DuelConf : MonoBehaviour {
 		interfaz.actualizarAutoestimas(personajes[0].darAutoestima() + "", personajes[1].darAutoestima() + "", 
 									personajes[2].darAutoestima() + "", personajes[3].darAutoestima() + "");
 		interfaz.actualizarPrejuicio(enemigoActual.darPrejuicio() + "");
-		//enEspera = true;
+		personajeActual = 0;
 		interfaz.deshabilitarBotones();
 		StartCoroutine("Espera");
 			

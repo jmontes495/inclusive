@@ -17,6 +17,8 @@ TagManager:
   - Stat0
   - Stat1
   - Stat2
+  - StatAtaque
+  - StatVictima
   layers:
   - Default
   - TransparentFX

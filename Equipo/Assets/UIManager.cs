@@ -23,6 +23,10 @@ public class UIManager : MonoBehaviour {
 
 	public Text stat2;
 
+	public Text statAtaque;
+
+	public Text statVictima;
+
 	void Awake () {
 		nbPersonajes[0] = GameObject.FindGameObjectWithTag("Nombrep0").GetComponent<Text>();
 		nbPersonajes[1] = GameObject.FindGameObjectWithTag("Nombrep1").GetComponent<Text>();
@@ -40,7 +44,9 @@ public class UIManager : MonoBehaviour {
 		stat0 = GameObject.FindGameObjectWithTag("Stat0").GetComponent<Text>();
 		stat1 = GameObject.FindGameObjectWithTag("Stat1").GetComponent<Text>();
 		stat2 = GameObject.FindGameObjectWithTag("Stat2").GetComponent<Text>();
-			
+		statAtaque = GameObject.FindGameObjectWithTag("StatAtaque").GetComponent<Text>();
+		statVictima = GameObject.FindGameObjectWithTag("StatVictima").GetComponent<Text>();
+
 	}
 	
 	// Update is called once per frame
@@ -53,9 +59,11 @@ public class UIManager : MonoBehaviour {
 		textoDialogo.text = pTexto;
 	}
 
-	public void configurarEnemigo(string pNombre)
+	public void configurarEnemigo(string pNombre, string pAtaque, string pVictima)
 	{
 		nombreEnemigo.text = pNombre;
+		statAtaque.text = pAtaque;
+		statVictima.text = pVictima;
 	}
 
 	public void configurarNombres(string n1, string n2, string n3, string n4)
