@@ -24,8 +24,9 @@ public class POEnemigo : MonoBehaviour {
 		
 	}
 
-	public void configurar(float pPrejuicio, float pAtaque)
+	public void configurar(string pNombre, float pPrejuicio, float pAtaque)
 	{
+		nombre = pNombre;
 		prejuicio = pPrejuicio;
 		ataque = pAtaque;
 	}
@@ -37,6 +38,11 @@ public class POEnemigo : MonoBehaviour {
 		{
 			prejuicio = 0;
 		}
+	}
+
+	public string darNombre()
+	{
+		return nombre;
 	}
 
 	public float darAtaque()

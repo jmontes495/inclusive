@@ -24,7 +24,10 @@ public class DuelConf : MonoBehaviour {
 		interfaz = FindObjectOfType<UIManager>();
 		configure();
 		enEspera = false;
-	}
+		interfaz.configurarNombres(personajes[0].darNombre(), personajes[1].darNombre(), personajes[2].darNombre(), personajes[3].darNombre());
+		interfaz.actualizarAutoestimas(personajes[0].darAutoestima() + "", personajes[1].darAutoestima() + "", 
+									personajes[2].darAutoestima() + "", personajes[3].darAutoestima() + "");
+			}
 	
 	// Update is called once per frame
 	void Update () {
@@ -34,6 +37,7 @@ public class DuelConf : MonoBehaviour {
 			interfaz.habilitarBotones();
 			personajeActual = 0;
 			interfaz.setTexto("¿Qué hará " + personajes[personajeActual].darNombre() + "?");
+			interfaz.refrescarStats(personajes[personajeActual].darAutoestima(), personajes[personajeActual].darMultiplicador(), personajes[personajeActual].darDefensa());
 		}
 	}
 
@@ -52,8 +56,11 @@ public class DuelConf : MonoBehaviour {
 			personajes[1].configurar(false, 1.5f, 0.15f);
 			personajes[2].configurar(false, 1.0f, 0.5f);
 			personajes[3].configurar(false, 1.0f, 0.5f);
-			enemigoActual.configurar(105.5f, 10f);
+			enemigoActual.configurar("Tía Homofóbica", 105.5f, 10f);
+			interfaz.configurarEnemigo(enemigoActual.darNombre());
+			interfaz.actualizarPrejuicio(enemigoActual.darPrejuicio() + "");
 			interfaz.setTexto("¿Qué hará " + personajes[personajeActual].darNombre() + "?");
+			interfaz.refrescarStats(personajes[personajeActual].darAutoestima(), personajes[personajeActual].darMultiplicador(), personajes[personajeActual].darDefensa());
 		}
 	}
 
@@ -67,6 +74,7 @@ public class DuelConf : MonoBehaviour {
 		else
 		{
 			interfaz.setTexto("¿Qué hará " + personajes[personajeActual].darNombre() + "?");
+			interfaz.refrescarStats(personajes[personajeActual].darAutoestima(), personajes[personajeActual].darMultiplicador(), personajes[personajeActual].darDefensa());
 		}
 	}
 
@@ -111,6 +119,9 @@ public class DuelConf : MonoBehaviour {
 		}
 
 		interfaz.setTexto(texto);
+		interfaz.actualizarAutoestimas(personajes[0].darAutoestima() + "", personajes[1].darAutoestima() + "", 
+									personajes[2].darAutoestima() + "", personajes[3].darAutoestima() + "");
+		interfaz.actualizarPrejuicio(enemigoActual.darPrejuicio() + "");
 		//enEspera = true;
 		interfaz.deshabilitarBotones();
 		StartCoroutine("Espera");

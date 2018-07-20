@@ -3,7 +3,20 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - Nombrep0
+  - Nombrep1
+  - Nombrep2
+  - Nombrep3
+  - Autoestimap0
+  - Autoestimap1
+  - Autoestimap2
+  - Autoestimap3
+  - NombreEnemigo
+  - Prejuicio
+  - Stat0
+  - Stat1
+  - Stat2
   layers:
   - Default
   - TransparentFX

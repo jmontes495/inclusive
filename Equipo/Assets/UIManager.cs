@@ -8,9 +8,39 @@ public class UIManager : MonoBehaviour {
 	public Text textoDialogo;
 
 	public GameObject botones;
-	// Use this for initialization
-	void Start () {
-		
+
+	public Text[] nbPersonajes;
+
+	public Text[] autoestimas;
+
+	public Text nombreEnemigo;
+
+	public Text prejuicio;
+
+	public Text stat0;
+
+	public Text stat1;
+
+	public Text stat2;
+
+	void Awake () {
+		nbPersonajes[0] = GameObject.FindGameObjectWithTag("Nombrep0").GetComponent<Text>();
+		nbPersonajes[1] = GameObject.FindGameObjectWithTag("Nombrep1").GetComponent<Text>();
+		nbPersonajes[2] = GameObject.FindGameObjectWithTag("Nombrep2").GetComponent<Text>();
+		nbPersonajes[3] = GameObject.FindGameObjectWithTag("Nombrep3").GetComponent<Text>();
+
+		autoestimas[0] = GameObject.FindGameObjectWithTag("Autoestimap0").GetComponent<Text>();
+		autoestimas[1] = GameObject.FindGameObjectWithTag("Autoestimap1").GetComponent<Text>();
+		autoestimas[2] = GameObject.FindGameObjectWithTag("Autoestimap2").GetComponent<Text>();
+		autoestimas[3] = GameObject.FindGameObjectWithTag("Autoestimap3").GetComponent<Text>();
+
+		nombreEnemigo = GameObject.FindGameObjectWithTag("NombreEnemigo").GetComponent<Text>();
+		prejuicio = GameObject.FindGameObjectWithTag("Prejuicio").GetComponent<Text>();
+
+		stat0 = GameObject.FindGameObjectWithTag("Stat0").GetComponent<Text>();
+		stat1 = GameObject.FindGameObjectWithTag("Stat1").GetComponent<Text>();
+		stat2 = GameObject.FindGameObjectWithTag("Stat2").GetComponent<Text>();
+			
 	}
 	
 	// Update is called once per frame
@@ -21,6 +51,39 @@ public class UIManager : MonoBehaviour {
 	public void setTexto(string pTexto)
 	{
 		textoDialogo.text = pTexto;
+	}
+
+	public void configurarEnemigo(string pNombre)
+	{
+		nombreEnemigo.text = pNombre;
+	}
+
+	public void configurarNombres(string n1, string n2, string n3, string n4)
+	{
+		nbPersonajes[0].text = n1;
+		nbPersonajes[1].text = n2;
+		nbPersonajes[2].text = n3;
+		nbPersonajes[3].text = n4;
+	}
+
+	public void actualizarAutoestimas(string a1, string a2, string a3, string a4)
+	{
+		autoestimas[0].text = a1;
+		autoestimas[1].text = a2;
+		autoestimas[2].text = a3;
+		autoestimas[3].text = a4;
+	}
+
+	public void refrescarStats(float s0, float s1, float s2)
+	{
+		stat0.text = s0 + " puntos";
+		stat1.text = "x" + s1;
+		stat2.text = "x" + s2;
+	}
+
+	public void actualizarPrejuicio(string pPrejuicio)
+	{
+		prejuicio.text = pPrejuicio;
 	}
 
 	public void deshabilitarBotones()

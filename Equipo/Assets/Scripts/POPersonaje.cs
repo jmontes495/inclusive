@@ -40,6 +40,16 @@ public class POPersonaje : MonoBehaviour {
 		return autoestima;
 	}
 
+	public float darMultiplicador()
+	{
+		return multiplicador;
+	}
+
+	public float darDefensa()
+	{
+		return defensa;
+	}
+
 	public void configurar(bool pVulnerable, float pMult, float pDefensa)
 	{
 		vulnerable = pVulnerable;
