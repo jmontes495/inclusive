@@ -60,7 +60,6 @@ public class DuelConf : MonoBehaviour {
 		}
 		if(!enDuelo && enEspera && Input.GetKeyDown(KeyCode.Space))
 		{
-			colorEnemigo.avanzarDuelo();
 			eManager.fadeOut();
 			configure();
 		}
@@ -84,6 +83,7 @@ public class DuelConf : MonoBehaviour {
 		else if(numeroDuelo == 2)
 		{
 			// Vulnerable, multiplicador, defensa
+			colorEnemigo.avanzarDuelo();
 			personajes[0].configurar(false, 0.8f, "Gay mestizo");
 			personajes[1].configurar(true, 0.2f, "Negra");
 			personajes[2].configurar(false, 1.5f, "Trans blanca");
