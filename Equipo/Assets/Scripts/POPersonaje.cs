@@ -14,7 +14,7 @@ public class POPersonaje : MonoBehaviour {
 
 	private float multiplicador;
 
-	private float defensa;
+	private string defensa;
 
 	private float autoestima;
 
@@ -45,12 +45,12 @@ public class POPersonaje : MonoBehaviour {
 		return multiplicador;
 	}
 
-	public float darDefensa()
+	public string darDefensa()
 	{
 		return defensa;
 	}
 
-	public void configurar(bool pVulnerable, float pMult, float pDefensa)
+	public void configurar(bool pVulnerable, float pMult, string pDefensa)
 	{
 		vulnerable = pVulnerable;
 		multiplicador = pMult;
@@ -63,8 +63,8 @@ public class POPersonaje : MonoBehaviour {
 		float ataque = 0;
 		if(vulnerable || accionActual == Accion.Defender)
 		{
-			ataque = (pAtaque * defensa);
-			autoestima -= ataque;
+			autoestima -= pAtaque;
+			ataque = pAtaque;
 		}
 		if(autoestima < 0)
 		{

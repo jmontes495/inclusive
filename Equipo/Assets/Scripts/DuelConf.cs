@@ -30,6 +30,10 @@ public class DuelConf : MonoBehaviour {
 	public GameObject botonAtaque;
 
 	private EventSystem _eventSystem;
+
+	private float maximo;
+
+	private ColorEnemigo colorEnemigo;
 	// Use this for initialization
 	void Start () {
 		personajes = GetComponents<POPersonaje>();
@@ -38,6 +42,7 @@ public class DuelConf : MonoBehaviour {
 		eManager = FindObjectOfType<EffectsManager>();
 		barraEmpatia = FindObjectOfType<BarraEmpatia>();
 		_eventSystem = FindObjectOfType<EventSystem>();
+		colorEnemigo = FindObjectOfType<ColorEnemigo>();
 		configure();
 		}
 	
@@ -55,16 +60,11 @@ public class DuelConf : MonoBehaviour {
 		}
 		if(!enDuelo && enEspera && Input.GetKeyDown(KeyCode.Space))
 		{
+			colorEnemigo.avanzarDuelo();
 			eManager.fadeOut();
 			configure();
 		}
 				
-	}
-
-	public void nextDuel()
-	{
-		numeroDuelo++;
-		enDuelo = true;
 	}
 
 	public void configure()
@@ -73,20 +73,45 @@ public class DuelConf : MonoBehaviour {
 		if(numeroDuelo == 1)
 		{
 			// Vulnerable, multiplicador, defensa
-			personajes[0].configurar(true, 0.2f, 2.0f);
-			victima = personajes[0].darNombre();
-			personajes[1].configurar(false, 1.5f, 0.15f);
-			personajes[2].configurar(false, 1.0f, 0.5f);
-			personajes[3].configurar(false, 1.0f, 0.5f);
-			enemigoActual.configurar("Tía Homofóbica", 105.5f, 20f);
+			personajes[0].configurar(false, 1.0f, "Gay mestizo");
+			personajes[1].configurar(false, 0.8f, "Negra");
+			personajes[2].configurar(false, 1.5f, "Trans blanca");
+			personajes[3].configurar(true, 0.2f, "Pobre");
+			victima = personajes[3].darNombre();
+			enemigoActual.configurar("Cajero elitista", 180f, 20f);
+			maximo = 180f;
 		}
+		else if(numeroDuelo == 2)
+		{
+			// Vulnerable, multiplicador, defensa
+			personajes[0].configurar(false, 0.8f, "Gay mestizo");
+			personajes[1].configurar(true, 0.2f, "Negra");
+			personajes[2].configurar(false, 1.5f, "Trans blanca");
+			personajes[3].configurar(false, 1.0f, "Pobre");
+			victima = personajes[1].darNombre();
+			enemigoActual.configurar("Cuñado racista", 200f, 20f);
+			maximo = 200;
+		}
+		else if(numeroDuelo == 3)
+		{
+			// Vulnerable, multiplicador, defensa
+			personajes[0].configurar(true, 0.2f, "Gay mestizo");
+			victima = personajes[0].darNombre();
+			personajes[1].configurar(false, 1.5f, "Negra");
+			personajes[2].configurar(false, 0.8f, "Trans blanca");
+			personajes[3].configurar(false, 1.0f, "Pobre");
+			enemigoActual.configurar("Tía Homofóbica", 200f, 20f);
+			maximo = 200f;
+		}
+		
+
 		interfaz.configurarNombres(personajes[0].darNombre(), personajes[1].darNombre(), personajes[2].darNombre(), personajes[3].darNombre());
 		interfaz.actualizarAutoestimas(personajes[0].darAutoestima() + "", personajes[1].darAutoestima() + "", 
 									personajes[2].darAutoestima() + "", personajes[3].darAutoestima() + "");
 		
 
 		interfaz.configurarEnemigo(enemigoActual.darNombre(), enemigoActual.darAtaque() + "", victima);
-		interfaz.actualizarPrejuicio(enemigoActual.darPrejuicio() + "");
+		interfaz.actualizarPrejuicio(enemigoActual.darPrejuicio()  + "/" + maximo);
 		interfaz.setTexto("¿Qué hará " + personajes[personajeActual].darNombre() + "?");
 		interfaz.habilitarBotones();
 		interfaz.refrescarStats(personajes[personajeActual].darAutoestima(), personajes[personajeActual].darMultiplicador(), personajes[personajeActual].darDefensa());
@@ -135,9 +160,14 @@ public class DuelConf : MonoBehaviour {
        		{
        			ataque++;
        		}
+       		else if(p0.darAccionActual() == POPersonaje.Accion.Poder)
+       		{
+    			texto += "Con el apoyo de sus amigos " + victima + " generó 50 de daño \n";
+    			barraEmpatia.reiniciar();
+       		}
     	}
     	barraEmpatia.aumentar(ataque*0.2f);
-    	texto += "El enemigo sufre " + enemigoSufre + " de daño \n";
+    	texto += "El enemigo pierde " + enemigoSufre + " de prejuicio \n";
     	texto += "El equipo adquiere " + ataque + " puntos de empatía \n";
 
 		if(enemigoActual.darPrejuicio() > 0)
@@ -146,7 +176,10 @@ public class DuelConf : MonoBehaviour {
 			foreach (POPersonaje p0 in personajes)
     		{
        			float damage = p0.reducirAutoestima(enemigoActual.darAtaque()/(defensa + 1));
-       			texto += p0.darNombre() + " sufre " + damage + " de daño \n";
+       			if(damage != 0)
+       			{
+       				texto += p0.darNombre() + " sufre " + damage + " de daño \n";
+       			}
        			if(p0.darAutoestima() == 0)
        			{
        				enDuelo = false;
@@ -158,13 +191,14 @@ public class DuelConf : MonoBehaviour {
 		else
 		{
 			enDuelo = false;
+			numeroDuelo++;
 			texto += "Has acabado con el prejuicio! :)";
 		}
 
 		interfaz.setTexto(texto);
 		interfaz.actualizarAutoestimas(personajes[0].darAutoestima() + "", personajes[1].darAutoestima() + "", 
 									personajes[2].darAutoestima() + "", personajes[3].darAutoestima() + "");
-		interfaz.actualizarPrejuicio(enemigoActual.darPrejuicio() + "");
+		interfaz.actualizarPrejuicio(enemigoActual.darPrejuicio() + "/" + maximo);
 		personajeActual = 0;
 		interfaz.deshabilitarBotones();
 		StartCoroutine("Espera");			
@@ -207,7 +241,7 @@ public class DuelConf : MonoBehaviour {
 
 	private IEnumerator Espera()
 	{
-		yield return new WaitForSeconds(0.5f);
+		yield return new WaitForSeconds(0.25f);
 		enEspera = true;
 	}
 

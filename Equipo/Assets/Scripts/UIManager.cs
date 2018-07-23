@@ -28,6 +28,9 @@ public class UIManager : MonoBehaviour {
 	public Text statVictima;
 
 	void Awake () {
+
+		Cursor.visible = false;
+
 		nbPersonajes[0] = GameObject.FindGameObjectWithTag("Nombrep0").GetComponent<Text>();
 		nbPersonajes[1] = GameObject.FindGameObjectWithTag("Nombrep1").GetComponent<Text>();
 		nbPersonajes[2] = GameObject.FindGameObjectWithTag("Nombrep2").GetComponent<Text>();
@@ -76,17 +79,17 @@ public class UIManager : MonoBehaviour {
 
 	public void actualizarAutoestimas(string a1, string a2, string a3, string a4)
 	{
-		autoestimas[0].text = a1;
-		autoestimas[1].text = a2;
-		autoestimas[2].text = a3;
-		autoestimas[3].text = a4;
+		autoestimas[0].text = a1 + "/50";
+		autoestimas[1].text = a2 + "/50";
+		autoestimas[2].text = a3 + "/50";
+		autoestimas[3].text = a4 + "/50";
 	}
 
-	public void refrescarStats(float s0, float s1, float s2)
+	public void refrescarStats(float s0, float s1, string s2)
 	{
-		stat0.text = s0 + " puntos";
+		//stat0.text = s0 + " puntos";
 		stat1.text = "x" + s1;
-		stat2.text = "x" + s2;
+		stat2.text = s2;
 	}
 
 	public void actualizarPrejuicio(string pPrejuicio)
