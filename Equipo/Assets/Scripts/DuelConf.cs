@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class DuelConf : MonoBehaviour {
 
@@ -19,12 +20,24 @@ public class DuelConf : MonoBehaviour {
 	private EffectsManager eManager;
 
 	private bool enEspera = false;
+
+	private BarraEmpatia barraEmpatia;
+
+	private string victima;
+
+	public GameObject botonEmpatia;
+
+	public GameObject botonAtaque;
+
+	private EventSystem _eventSystem;
 	// Use this for initialization
 	void Start () {
 		personajes = GetComponents<POPersonaje>();
 		enemigoActual = GetComponent<POEnemigo>();
 		interfaz = FindObjectOfType<UIManager>();
 		eManager = FindObjectOfType<EffectsManager>();
+		barraEmpatia = FindObjectOfType<BarraEmpatia>();
+		_eventSystem = FindObjectOfType<EventSystem>();
 		configure();
 		}
 	
@@ -37,6 +50,8 @@ public class DuelConf : MonoBehaviour {
 			personajeActual = 0;
 			interfaz.setTexto("¿Qué hará " + personajes[personajeActual].darNombre() + "?");
 			interfaz.refrescarStats(personajes[personajeActual].darAutoestima(), personajes[personajeActual].darMultiplicador(), personajes[personajeActual].darDefensa());
+			activarBarra();
+			StartCoroutine("SelectContinueButtonLater");
 		}
 		if(!enDuelo && enEspera && Input.GetKeyDown(KeyCode.Space))
 		{
@@ -54,7 +69,7 @@ public class DuelConf : MonoBehaviour {
 
 	public void configure()
 	{
-		string victima = "";
+		victima = "";
 		if(numeroDuelo == 1)
 		{
 			// Vulnerable, multiplicador, defensa
@@ -63,7 +78,7 @@ public class DuelConf : MonoBehaviour {
 			personajes[1].configurar(false, 1.5f, 0.15f);
 			personajes[2].configurar(false, 1.0f, 0.5f);
 			personajes[3].configurar(false, 1.0f, 0.5f);
-			enemigoActual.configurar("Tía Homofóbica", 105.5f, 30f);
+			enemigoActual.configurar("Tía Homofóbica", 105.5f, 20f);
 		}
 		interfaz.configurarNombres(personajes[0].darNombre(), personajes[1].darNombre(), personajes[2].darNombre(), personajes[3].darNombre());
 		interfaz.actualizarAutoestimas(personajes[0].darAutoestima() + "", personajes[1].darAutoestima() + "", 
@@ -78,7 +93,9 @@ public class DuelConf : MonoBehaviour {
 			
 		enEspera = false;
 		enDuelo = true;
-
+		barraEmpatia.reiniciar();
+		activarBarra();
+		StartCoroutine("SelectContinueButtonLater");
 	}
 
 	public void avanzarPersonaje()
@@ -92,6 +109,8 @@ public class DuelConf : MonoBehaviour {
 		{
 			interfaz.setTexto("¿Qué hará " + personajes[personajeActual].darNombre() + "?");
 			interfaz.refrescarStats(personajes[personajeActual].darAutoestima(), personajes[personajeActual].darMultiplicador(), personajes[personajeActual].darDefensa());
+			activarBarra();
+			StartCoroutine("SelectContinueButtonLater");
 		}
 	}
 
@@ -107,12 +126,19 @@ public class DuelConf : MonoBehaviour {
 
     	// Generar el daño sobre el enemigo
     	float enemigoSufre = 0;
+    	int ataque = 0;
     	foreach (POPersonaje p0 in personajes)
     	{
        		enemigoActual.reducirPrejuicio(p0.ataca());
        		enemigoSufre += p0.ataca();
+       		if(p0.darAccionActual() == POPersonaje.Accion.Atacar)
+       		{
+       			ataque++;
+       		}
     	}
+    	barraEmpatia.aumentar(ataque*0.2f);
     	texto += "El enemigo sufre " + enemigoSufre + " de daño \n";
+    	texto += "El equipo adquiere " + ataque + " puntos de empatía \n";
 
 		if(enemigoActual.darPrejuicio() > 0)
 		{
@@ -141,8 +167,21 @@ public class DuelConf : MonoBehaviour {
 		interfaz.actualizarPrejuicio(enemigoActual.darPrejuicio() + "");
 		personajeActual = 0;
 		interfaz.deshabilitarBotones();
-		StartCoroutine("Espera");
-			
+		StartCoroutine("Espera");			
+	}
+
+
+
+	public void activarBarra()
+	{
+		if(barraEmpatia.darCompletitud() >= 1 && personajes[personajeActual].darNombre().Equals(victima))
+		{
+			botonEmpatia.SetActive(true);
+		}
+		else
+		{
+			botonEmpatia.SetActive(false);
+		}
 	}
 
 	public void definirAccion(POPersonaje.Accion pAccion)
@@ -171,6 +210,13 @@ public class DuelConf : MonoBehaviour {
 		yield return new WaitForSeconds(0.5f);
 		enEspera = true;
 	}
+
+	private IEnumerator SelectContinueButtonLater()
+     {
+         yield return null;
+         _eventSystem.SetSelectedGameObject(null);
+         _eventSystem.SetSelectedGameObject(botonAtaque.gameObject);
+     }
 
 
 }

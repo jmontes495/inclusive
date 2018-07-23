@@ -104,5 +104,10 @@ public class POPersonaje : MonoBehaviour {
 		return ataque;
 	}
 
+	public Accion darAccionActual()
+	{
+		return accionActual;
+	}
+
 
 }
