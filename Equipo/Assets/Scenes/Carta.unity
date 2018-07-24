@@ -320,14 +320,10 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "Mis queridos y queridas Eduardo, Mariana, Franscisca y Pedro:\n\nSi est\xE1n
-    leyendo esta carta, es porque el trapo viejo que cargaba mi alma fue enterrado.
-    No hay porque llorar, morir es lo que nos toca a los viejos. La mejor manera de
-    honrar mi vida es que cada uno de ustedes pueda sonreir todos los d\xEDas siendo
-    quien son. Para no perder mi costumbre de viejo profe, dejo tare\xEDtas antes
-    de irme. Antes de dejar esta ciudad, cosa que todos van a hacer, incluso ud se\xF1or
-    Pedro, los dej\xE9 peque\xF1os regalos para que puedan ayudarse en esa gran tarea
-    que es la felicidad. Espero no verlos tan pronto. Un gran abrazo de su viejo Carlos.\n"
+  m_Text: "My drear Eduardo, Mariana, Franscisca and Pedro: \n\nIf you are reading
+    this letter is because the old sack that carried my soul has been buried. There
+    is no reason to cry, dying is what we old people must do eventually. The best
+    way to honor my life is for each of you can smile everyday, being who you are."
 --- !u!222 &746901271
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -464,9 +460,9 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "los d\xEDas siendo quien son. Ustedes saben que en ese mundo hay mucho
-    m\xE1s gris que el colorido que ustedes son, as\xED que les va a tocar pelear
-    por sus derechos.\n\nEspero no verlos tan pronto. Un gran abrazo de su viejo Carlos.\n"
+  m_Text: "You know that in this world there is a lot more gray than the colorful
+    souls that you are, so you are gonna have to fight for your rights. \n\nI hope
+    to not see you too soon. A big hug from your old man Carlos."
 --- !u!222 &1684190338
 CanvasRenderer:
   m_ObjectHideFlags: 0

@@ -707,7 +707,7 @@ MonoBehaviour:
     m_BestFit: 0
     m_MinSize: 2
     m_MaxSize: 40
-    m_Alignment: 2
+    m_Alignment: 0
     m_AlignByGeometry: 0
     m_RichText: 1
     m_HorizontalOverflow: 1
@@ -788,7 +788,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 1
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Defender
+  m_Text: Defend
 --- !u!222 &179340507
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1011,8 +1011,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 432, y: -100}
-  m_SizeDelta: {x: 764, y: 100}
+  m_AnchoredPosition: {x: 435.5, y: -100}
+  m_SizeDelta: {x: 771, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &331349949
 MonoBehaviour:
@@ -1103,7 +1103,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "Empat\xEDa"
+  m_Text: Empathy
 --- !u!222 &347647119
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1178,7 +1178,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 1
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'Valor:'
+  m_Text: 'Courage:'
 --- !u!222 &392195708
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1362,7 +1362,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 1
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'Vulnerabilidad:'
+  m_Text: 'Vulnerability:'
 --- !u!222 &485607768
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -2314,7 +2314,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 1
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "Poder de la empat\xEDa"
+  m_Text: The power of empathy
 --- !u!222 &821882205
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -2389,7 +2389,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'Ataque:'
+  m_Text: 'Attack power:'
 --- !u!222 &837271489
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -2557,7 +2557,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 462, y: -0}
+  m_AnchoredPosition: {x: 465.5, y: -0}
   m_SizeDelta: {x: 320, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &965892568
@@ -2649,7 +2649,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'Prejuicio:'
+  m_Text: 'Prejudice:'
 --- !u!222 &998380380
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -3071,6 +3071,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nombre: Pedro
   identificador: 3
+  imagenPersonaje: {fileID: 1791242309}
+  normal: {r: 1, g: 1, b: 1, a: 1}
+  enTurno: {r: 1, g: 0.8520418, b: 0, a: 1}
 --- !u!114 &1319920556
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3084,6 +3087,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nombre: Francisca
   identificador: 2
+  imagenPersonaje: {fileID: 743108442}
+  normal: {r: 1, g: 1, b: 1, a: 1}
+  enTurno: {r: 1, g: 0.85490197, b: 0, a: 1}
 --- !u!114 &1319920557
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3097,6 +3103,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nombre: Mariana
   identificador: 1
+  imagenPersonaje: {fileID: 1464771953}
+  normal: {r: 1, g: 1, b: 1, a: 1}
+  enTurno: {r: 1, g: 0.85490197, b: 0, a: 1}
 --- !u!114 &1319920558
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3110,6 +3119,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nombre: Eduardo
   identificador: 0
+  imagenPersonaje: {fileID: 839284407}
+  normal: {r: 1, g: 1, b: 1, a: 1}
+  enTurno: {r: 1, g: 0.85490197, b: 0, a: 1}
 --- !u!114 &1319920559
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3333,7 +3345,7 @@ MonoBehaviour:
     m_BestFit: 0
     m_MinSize: 2
     m_MaxSize: 40
-    m_Alignment: 2
+    m_Alignment: 0
     m_AlignByGeometry: 0
     m_RichText: 1
     m_HorizontalOverflow: 1
@@ -3414,7 +3426,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "V\xEDctima:"
+  m_Text: 'Victim:'
 --- !u!222 &1361418122
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -3756,7 +3768,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 417, y: -20}
+  m_AnchoredPosition: {x: 420.5, y: -20}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1541860239
@@ -4273,6 +4285,8 @@ GameObject:
   - component: {fileID: 1823984927}
   - component: {fileID: 1823984926}
   - component: {fileID: 1823984925}
+  - component: {fileID: 1823984929}
+  - component: {fileID: 1823984928}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -4341,6 +4355,112 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1823984928
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1823984924}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6ce8ccbd85f5d4af586ebe4a3c30d506, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!82 &1823984929
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1823984924}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 8300000, guid: 31e75cdb977c74bb69bb342d8abda76f, type: 3}
+  m_PlayOnAwake: 0
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!1 &1880212600
 GameObject:
   m_ObjectHideFlags: 0
@@ -4561,7 +4681,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 1
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Confrontar
+  m_Text: Confront
 --- !u!222 &2039052793
 CanvasRenderer:
   m_ObjectHideFlags: 0

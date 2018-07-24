@@ -2,10 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.SceneManagement;
 
 public class DuelConf : MonoBehaviour {
 
-	private int numeroDuelo = 1;
+	private int numeroDuelo = 3;
 
 	private bool enDuelo;
 
@@ -34,6 +35,12 @@ public class DuelConf : MonoBehaviour {
 	private float maximo;
 
 	private ColorEnemigo colorEnemigo;
+
+	private EfectosSonido efectosSonido;
+
+	private string fraseFinal;
+
+	private string fraseInicial;
 	// Use this for initialization
 	void Start () {
 		personajes = GetComponents<POPersonaje>();
@@ -43,6 +50,7 @@ public class DuelConf : MonoBehaviour {
 		barraEmpatia = FindObjectOfType<BarraEmpatia>();
 		_eventSystem = FindObjectOfType<EventSystem>();
 		colorEnemigo = FindObjectOfType<ColorEnemigo>();
+		efectosSonido = FindObjectOfType<EfectosSonido>();
 		configure();
 		}
 	
@@ -53,7 +61,7 @@ public class DuelConf : MonoBehaviour {
 			enEspera = false;
 			interfaz.habilitarBotones();
 			personajeActual = 0;
-			interfaz.setTexto("¿Qué hará " + personajes[personajeActual].darNombre() + "?");
+			interfaz.setTexto("¿What will " + personajes[personajeActual].darNombre() + " do?");
 			interfaz.refrescarStats(personajes[personajeActual].darAutoestima(), personajes[personajeActual].darMultiplicador(), personajes[personajeActual].darDefensa());
 			activarBarra();
 			StartCoroutine("SelectContinueButtonLater");
@@ -72,36 +80,46 @@ public class DuelConf : MonoBehaviour {
 		if(numeroDuelo == 1)
 		{
 			// Vulnerable, multiplicador, defensa
-			personajes[0].configurar(false, 1.0f, "Gay mestizo");
-			personajes[1].configurar(false, 0.8f, "Negra");
-			personajes[2].configurar(false, 1.5f, "Trans blanca");
-			personajes[3].configurar(true, 0.2f, "Pobre");
+			fraseInicial = "The group of friends go get something to eat but the cashier looks with disgust at Pedro and informs them the dinner has the right of admission reserved.";
+			personajes[0].configurar(false, 1.0f, "Gay, mixed race");
+			personajes[1].configurar(false, 0.8f, "Black");
+			personajes[2].configurar(false, 1.5f, "Trans, white");
+			personajes[3].configurar(true, 0.2f, "Poor");
 			victima = personajes[3].darNombre();
-			enemigoActual.configurar("Cajero elitista", 180f, 20f);
+			enemigoActual.configurar("Elitist cashier", 180f, 20f);
+			fraseFinal = "The manager apologized in the name of the restaurant, since their policy is not that. The cashier looks embarrassed. You defeated prejudice!";
 			maximo = 180f;
 		}
 		else if(numeroDuelo == 2)
 		{
 			// Vulnerable, multiplicador, defensa
+			fraseInicial = "The family of Mariana's boyfriend invites them for dinner. His brother asks if he got the maid pregnant.";
 			colorEnemigo.avanzarDuelo();
-			personajes[0].configurar(false, 0.8f, "Gay mestizo");
-			personajes[1].configurar(true, 0.2f, "Negra");
-			personajes[2].configurar(false, 1.5f, "Trans blanca");
-			personajes[3].configurar(false, 1.0f, "Pobre");
+			personajes[0].configurar(false, 0.8f, "Gay, mixed race");
+			personajes[1].configurar(true, 0.2f, "Black");
+			personajes[2].configurar(false, 1.5f, "Trans, white");
+			personajes[3].configurar(false, 1.0f, "Poor");
 			victima = personajes[1].darNombre();
-			enemigoActual.configurar("Cuñado racista", 200f, 20f);
+			enemigoActual.configurar("Racist brother in law", 200f, 20f);
+			fraseFinal= "In our family, love has always crossed barriers. The brother in law realizes that differences in the color of the skin should be celebrated, not frowned upon. You Defeated prejudice!";
 			maximo = 200;
 		}
 		else if(numeroDuelo == 3)
 		{
 			// Vulnerable, multiplicador, defensa
-			personajes[0].configurar(true, 0.2f, "Gay mestizo");
+			fraseInicial = " Eduardo has a very religious family, but it is time to come out of the closet.";
+			personajes[0].configurar(true, 0.2f, "Gay, mixed race");
 			victima = personajes[0].darNombre();
-			personajes[1].configurar(false, 1.5f, "Negra");
-			personajes[2].configurar(false, 0.8f, "Trans blanca");
-			personajes[3].configurar(false, 1.0f, "Pobre");
-			enemigoActual.configurar("Tía Homofóbica", 200f, 20f);
+			personajes[1].configurar(false, 1.5f, "Black");
+			personajes[2].configurar(false, 0.8f, "Trans, white");
+			personajes[3].configurar(false, 1.0f, "Poor");
+			enemigoActual.configurar("Catholic homophobic aunt", 200f, 20f);
+			fraseFinal="The aunt looks at her bible, reflects and says that it is true, we cannot love God unless we love each other. You defeated prejudice!";
 			maximo = 200f;
+		}
+		else if(numeroDuelo == 4)
+		{
+			SceneManager.LoadScene("Final");
 		}
 		
 
@@ -112,19 +130,23 @@ public class DuelConf : MonoBehaviour {
 
 		interfaz.configurarEnemigo(enemigoActual.darNombre(), enemigoActual.darAtaque() + "", victima);
 		interfaz.actualizarPrejuicio(enemigoActual.darPrejuicio()  + "/" + maximo);
-		interfaz.setTexto("¿Qué hará " + personajes[personajeActual].darNombre() + "?");
+			interfaz.setTexto("¿What will " + personajes[personajeActual].darNombre() + " do?");
 		interfaz.habilitarBotones();
 		interfaz.refrescarStats(personajes[personajeActual].darAutoestima(), personajes[personajeActual].darMultiplicador(), personajes[personajeActual].darDefensa());
 			
-		enEspera = false;
+		enEspera = true;
 		enDuelo = true;
 		barraEmpatia.reiniciar();
 		activarBarra();
+		personajes[personajeActual].cambiarEnTurno(false);
+		interfaz.setTexto(fraseInicial);
+		interfaz.deshabilitarBotones();
 		StartCoroutine("SelectContinueButtonLater");
 	}
 
 	public void avanzarPersonaje()
 	{
+		personajes[personajeActual].cambiarEnTurno(false);
 		personajeActual++;
 		if(personajeActual > 3)
 		{
@@ -132,7 +154,8 @@ public class DuelConf : MonoBehaviour {
 		}
 		else
 		{
-			interfaz.setTexto("¿Qué hará " + personajes[personajeActual].darNombre() + "?");
+			personajes[personajeActual].cambiarEnTurno(true);
+			interfaz.setTexto("¿What will " + personajes[personajeActual].darNombre() + " do?");
 			interfaz.refrescarStats(personajes[personajeActual].darAutoestima(), personajes[personajeActual].darMultiplicador(), personajes[personajeActual].darDefensa());
 			activarBarra();
 			StartCoroutine("SelectContinueButtonLater");
@@ -162,13 +185,13 @@ public class DuelConf : MonoBehaviour {
        		}
        		else if(p0.darAccionActual() == POPersonaje.Accion.Poder)
        		{
-    			texto += "Con el apoyo de sus amigos " + victima + " generó 50 de daño \n";
+    			texto += "With the support of friends " + victima + " striked 50 points of damage \n";
     			barraEmpatia.reiniciar();
        		}
     	}
     	barraEmpatia.aumentar(ataque*0.2f);
-    	texto += "El enemigo pierde " + enemigoSufre + " de prejuicio \n";
-    	texto += "El equipo adquiere " + ataque + " puntos de empatía \n";
+    	texto += "The enemy loses " + enemigoSufre + " of prejudice \n";
+    	texto += "The team wins " + ataque + " empathy points \n";
 
 		if(enemigoActual.darPrejuicio() > 0)
 		{
@@ -178,12 +201,12 @@ public class DuelConf : MonoBehaviour {
        			float damage = p0.reducirAutoestima(enemigoActual.darAtaque()/(defensa + 1));
        			if(damage != 0)
        			{
-       				texto += p0.darNombre() + " sufre " + damage + " de daño \n";
+       				texto += p0.darNombre() + " suffers " + damage + " points of damage \n";
        			}
        			if(p0.darAutoestima() == 0)
        			{
        				enDuelo = false;
-       				texto += p0.darNombre() + " se quedó sin autoestima... \nFIN DEL JUEGO";
+       				texto += p0.darNombre() + " is out of self esteem... \nGAME OVER";
        				break;
        			}
     		}
@@ -192,7 +215,7 @@ public class DuelConf : MonoBehaviour {
 		{
 			enDuelo = false;
 			numeroDuelo++;
-			texto += "Has acabado con el prejuicio! :)";
+			texto += fraseFinal;
 		}
 
 		interfaz.setTexto(texto);
@@ -220,6 +243,7 @@ public class DuelConf : MonoBehaviour {
 
 	public void definirAccion(POPersonaje.Accion pAccion)
 	{
+		efectosSonido.elegir();
 		personajes[personajeActual].definirAccion(pAccion);
 		avanzarPersonaje();
 	}

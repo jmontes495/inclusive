@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class POPersonaje : MonoBehaviour {
 
@@ -20,6 +21,12 @@ public class POPersonaje : MonoBehaviour {
 
 	private Accion accionActual;
 
+	public Image imagenPersonaje;
+
+	public Color normal;
+
+	public Color enTurno;
+
 	// Use this for initialization
 	void Start () {
 		
@@ -28,6 +35,20 @@ public class POPersonaje : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		
+	}
+
+	public void cambiarEnTurno(bool turno)
+	{
+		if(turno)
+		{
+			imagenPersonaje.color = enTurno;
+		}
+		else
+		{
+			{
+			imagenPersonaje.color = normal;
+		}
+		}
 	}
 
 	public string darNombre()
