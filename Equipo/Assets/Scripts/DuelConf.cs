@@ -6,7 +6,7 @@ using UnityEngine.SceneManagement;
 
 public class DuelConf : MonoBehaviour {
 
-	private int numeroDuelo = 3;
+	private int numeroDuelo = 1;
 
 	private bool enDuelo;
 
